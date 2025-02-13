@@ -1,1 +1,66 @@
+---
+apiversion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: nginx
+  labels:
+    app: nginx
+spec:
+  ports:
+  - port: 80
+    name: nginx
+  selector:
+    app: nginx
 
+---
+apiversion: apps/v1
+kind: StatfulSet
+metadata:
+  name: nginx
+  namespace: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  serviceName:nginx
+  replicas: 3
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx_nginx:1.19-alpine
+        ports:
+        - containerPort: 80
+          name: nginx
+        resources:
+          requests:
+            cpu: "100m"
+            mem: "250Mi"
+          limits:
+            cpu: "250m"
+            mem: "250Mi"
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+   volumes:
+   - name: www
+     persiatentVolumeClaim:
+       claimName: www-pvc
+
+---
+apiversion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: www-pvc
+spec:
+   accessModes:
+   - ReadWriteOnce
+   resources:
+     requests:
+       storage: 1Gi
