@@ -1,0 +1,14 @@
+From nginx:1.19-alpine
+WORKDIR /usr/share/nginx/html
+COPY ./html /usr/share/nginx/
+COPY ./nginx.conf /etc/nginx/
+RUN groupadd -r nginx && useradd -r -g nginx nginx
+USER nginx
+RUN chown -R nginx:nginx /etc/nginx /usr/share/nginx
+RUN chmod -R 755 /etc/nginx /usr/share/nginx
+EXPOSE 80
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
+
+#docker build -t nginx_nginx:1.19-alpine .
+#docker run -it nginx_nginx:1.19-alpine /bin/bash
+#docker push # push image to docker hub
