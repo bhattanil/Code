@@ -6,6 +6,6 @@ awk ‘{print $1 $2}’ abc.txt # print 1st and 2nd name and value
 
 tr ‘a-z’ ‘A-Z’ abc.txt # convert lower to upper case
 
-sed -I ‘s|ab|xy|g’ abc.txt # replace ab to xy
+sed -i ‘s|ab|xy|g’ abc.txt # replace ab to xy
 
 grep ‘error’ abc.txt # check the pattern or keyword available in file or not
