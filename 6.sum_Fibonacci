@@ -1,0 +1,13 @@
+class sum_fib(limit)
+   a,b=0,1
+   sum=0
+   while b<limit:
+       if b%2 ==0:
+       then
+           sum=sum+b
+       else:
+          print(“the no. is odd”)
+    a,b=b,a+b
+limit=100
+sum_fib(limit)
+print(sum)
