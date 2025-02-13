@@ -1,0 +1,15 @@
+class text_manipulation(text):
+    def __init__(self, text):
+         self_text(self, text)
+    def self_test_upper(text):
+         self_test.upper(text)
+text=”Hello this is text manipulation”
+print(text_manipulation.self_test_upper(text))
+
+class Dog:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+dog1 = Dog("Buddy", 3)
+print(dog1.name)  
